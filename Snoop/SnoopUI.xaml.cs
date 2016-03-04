@@ -260,14 +260,16 @@ namespace Snoop
 		{
 			get { return this.visualTreeItems; }
 		}
-		#endregion
+        #endregion
 
-		#region Root
+        #region Root
 
-	    /// <summary>
-	    /// Root element of the visual tree
-	    /// </summary>
-	    public VisualTreeItem Root
+        Visualization.Views.GeneralDiagramView diagramView;
+
+        /// <summary>
+        /// Root element of the visual tree
+        /// </summary>
+        public VisualTreeItem Root
 	    {
 	        get { return this.rootVisualTreeItem; }
             private set
@@ -275,7 +277,7 @@ namespace Snoop
                 this.rootVisualTreeItem = value;
 
                 Visualization.ViewModels.DiagramViewModel diagramVm = new Visualization.ViewModels.DiagramViewModel(value);
-                Visualization.Views.GeneralDiagramView diagramView = new Visualization.Views.GeneralDiagramView() { DataContext = diagramVm };
+                diagramView = new Visualization.Views.GeneralDiagramView() { DataContext = diagramVm };
                 visualizeContentControl.Content = diagramView;
                
                 
@@ -368,8 +370,10 @@ namespace Snoop
 
 					this.OnPropertyChanged("CurrentSelection");
 					this.OnPropertyChanged("CurrentFocusScope");
+                    diagramView.SelectedTreeItem = currentSelection;
 
-					if (this.visualTreeItems.Count > 1 || this.visualTreeItems.Count == 1 && this.visualTreeItems[0] != this.rootVisualTreeItem)
+
+                    if (this.visualTreeItems.Count > 1 || this.visualTreeItems.Count == 1 && this.visualTreeItems[0] != this.rootVisualTreeItem)
 					{
 						// Check whether the selected item is filtered out by the filter,
 						// in which case reset the filter.
@@ -384,7 +388,12 @@ namespace Snoop
 							RefreshCommand.Execute(null, this);
 						}
 					}
-				}
+
+                    
+
+                }
+
+
 			}
 		}
 

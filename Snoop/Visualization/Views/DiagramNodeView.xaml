@@ -16,7 +16,7 @@
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding IsSelected}" Value="True">
                                 <Setter Property="FontWeight" Value="Bold" />
-                                <Setter Property="Foreground" Value="Black" />
+                                <Setter Property="Foreground" Value="White" />
                             </DataTrigger>
                         </Style.Triggers>
 
@@ -41,15 +41,20 @@
 
 
             <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
-                <!--<telerik:RadContextMenu.ContextMenu>
-                    <telerik:RadContextMenu x:Name="radContextMenu"
-                                ItemsSource="{Binding Operation.ContenxtMenuProvider.MenuItems}"
-                                ItemContainerStyle="{StaticResource MenuItemContainer}" />
-                </telerik:RadContextMenu.ContextMenu>-->
-
-                <Rectangle Stroke="Black" Fill="#FFEEEEF2" StrokeThickness="2"
+                <Rectangle Stroke="Black"  StrokeThickness="2"
       Margin="0" Width="150" Height="40" x:Name="rect"  Stretch="Fill" >
 
+                    <Rectangle.Style>
+                        <Style TargetType="Rectangle">
+                            <Setter Property="Fill" Value="#FFEEEEF2" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                    <Setter Property="Fill" Value="DodgerBlue" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Rectangle.Style>
+                    
                     <Rectangle.Effect>
                         <DropShadowEffect Opacity="0.2" />
                     </Rectangle.Effect>

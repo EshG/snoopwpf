@@ -7,9 +7,28 @@
              
              xmlns:local="clr-namespace:Snoop.Visualization.Views">
     <Grid>
-        <ScrollViewer  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
+        <ScrollViewer Name="scrollViewer"  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="Transparent"
             Width="{Binding Path=ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContentControl}}}" >
-            <Grid >
+            <Grid Name="innerGrid">
+                <Grid.LayoutTransform>
+                    <TransformGroup>
+                        <ScaleTransform x:Name="scaleTransform"/>
+                    </TransformGroup>
+                </Grid.LayoutTransform>
+
+
+                <ItemsControl ItemsSource="{Binding Links}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate >
+                            <Canvas />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <local:LinkArrow />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
 
                 <ItemsControl ItemsSource="{Binding Nodes}" Name="nodesItemSource"  >
                     <ItemsControl.ItemsPanel>
@@ -35,21 +54,10 @@
                 </ItemsControl>
 
 
-                <ItemsControl ItemsSource="{Binding Links}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate >
-                            <Canvas />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <local:LinkArrow />
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
 
-
+                <Slider  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Maximum="1.2" Minimum="0.2" x:Name="slider"/>
             </Grid>
         </ScrollViewer>
+     
     </Grid>
 </UserControl>

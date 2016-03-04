@@ -59,6 +59,18 @@ namespace Snoop.Visualization.ViewModels
             }
         }
 
+        private bool _IsSelected;
+        public bool IsSelected
+        {
+            get { return _IsSelected; }
+            set
+            {
+                _IsSelected = value;
+                NotifyChange(nameof(IsSelected));
+            }
+        }
+
+
 
         #region Graphlayout
 

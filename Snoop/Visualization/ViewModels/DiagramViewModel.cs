@@ -28,6 +28,32 @@ namespace Snoop.Visualization.ViewModels
             private set { _Root = value; }
         }
 
+        private DiagramNodeViewModel _SelectedNode;
+        public DiagramNodeViewModel SelectedNode
+        {
+            get { return _SelectedNode; }
+            set
+            {
+                if (_SelectedNode != null)
+                    _SelectedNode.IsSelected = false;
+
+                _SelectedNode = value;
+
+                if (_SelectedNode != null)
+                    _SelectedNode.IsSelected = true;
+
+                NotifyChange(nameof(SelectedNode));
+            }
+        }
+
+
+        public void SetSelection(VisualTreeItem treeItem)
+        {
+            if (viewModelsByTreeItem.ContainsKey(treeItem))
+            {
+                SelectedNode = viewModelsByTreeItem[treeItem];
+            }
+        }
 
         /// <summary>
         /// Sets the nodes location on the diagram.
