@@ -273,9 +273,63 @@ namespace Snoop
             private set
             {
                 this.rootVisualTreeItem = value;
+
+                Visualization.ViewModels.DiagramViewModel diagramVm = new Visualization.ViewModels.DiagramViewModel(value);
+                Visualization.Views.GeneralDiagramView diagramView = new Visualization.Views.GeneralDiagramView() { DataContext = diagramVm };
+                visualizeContentControl.Content = diagramView;
+               
+                
                 this.OnPropertyChanged("Root");
             }
 	    }
+
+        public static IEnumerable<T> Traverse<T>(T item, Func<T, IEnumerable<T>> childSelector)
+        {
+            var stack = new Stack<T>();
+            stack.Push(item);
+            while (stack.Any())
+            {
+                var next = stack.Pop();
+                yield return next;
+                foreach (var child in childSelector(next))
+                    stack.Push(child);
+            }
+        }
+
+
+
+        List<VisualTreeItem> listToReturn = new List<VisualTreeItem>();
+        Dictionary<string,VisualTreeItem> loadedViewModels = new Dictionary<string, VisualTreeItem>();
+
+        List<VisualTreeItem> LoadViewModels (VisualTreeItem value)
+        {
+            
+           
+            foreach (VisualTreeItem item in value.Children)
+            {
+                if(item.Target is FrameworkElement)
+                {
+                    FrameworkElement fe = item.Target as FrameworkElement;
+                    if (fe.DataContext != null && ! (fe.DataContext is string) )
+                    {
+                        string vm = fe.DataContext.ToString();
+                        if (!loadedViewModels.ContainsKey(vm))
+                        {
+                            loadedViewModels[vm] = item;
+                            listToReturn.Add(item);
+                        }
+                       
+                    }
+
+                    if (item.Children.Count > 0)
+                    {
+                        LoadViewModels(item);
+                    }
+                }
+            }
+
+            return listToReturn;
+        }
 
 	    /// <summary>
 		/// rootVisualTreeItem is the VisualTreeItem for the root you are inspecting.

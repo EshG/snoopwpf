@@ -1,0 +1,87 @@
+﻿<UserControl x:Class="Snoop.Visualization.Views.LinkArrow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Snoop.Visualization.Views"
+             xmlns:custom="clr-namespace:Snoop.Visualization.CustomControls"
+             xmlns:converters="clr-namespace:Snoop.Visualization.Converters"
+             >
+    <UserControl.Resources>
+        <converters:LinkEndsPositionConverter x:Key="LinkEndsPositionConverter" />
+    </UserControl.Resources>
+    <UserControl.ContextMenu>
+        <ContextMenu>
+            <TextBlock IsHitTestVisible="False" Text="{Binding DisplayText}" />
+            <Separator />
+            <MenuItem Header="Display parameters" />
+            <MenuItem Header="Delete link" />
+        </ContextMenu>
+    </UserControl.ContextMenu>
+    <Grid>
+        <custom:ArrowLine x:Name="PART_MainLine" Stroke="Black"  Fill="Gray" StrokeThickness="2"  StrokeEndLineCap="Triangle" StrokeStartLineCap="Flat">
+            <custom:ArrowLine.Triggers>
+                <EventTrigger RoutedEvent="custom:ArrowLine.MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <!--<ColorAnimation From="Transparent" To="Orange" 
+                                    Storyboard.TargetProperty="(custom:ArrowLine.Effect).(Color)" 
+                                    Duration="0:0:1"/>-->
+                            <DoubleAnimationUsingKeyFrames
+                                    
+                                    Storyboard.TargetProperty="StrokeThickness">
+
+                                <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="5" />
+                            </DoubleAnimationUsingKeyFrames>
+
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="custom:ArrowLine.MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimationUsingKeyFrames
+                                    Storyboard.TargetProperty="StrokeThickness">
+                                <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="2" />
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </custom:ArrowLine.Triggers>
+
+            <custom:ArrowLine.X1>
+                <MultiBinding Converter="{StaticResource LinkEndsPositionConverter}" ConverterParameter="x1">
+                    <Binding  />
+                    <Binding ElementName="nodesItemSource" Path="ItemContainerGenerator" />
+                    <Binding Path="Origin.Location.X" />
+                </MultiBinding>
+            </custom:ArrowLine.X1>
+
+            <custom:ArrowLine.Y1>
+                <MultiBinding Converter="{StaticResource LinkEndsPositionConverter}" ConverterParameter="y1">
+                    <Binding  />
+                    <Binding ElementName="nodesItemSource" Path="ItemContainerGenerator" />
+                    <Binding Path="Origin.Location.Y" />
+                </MultiBinding>
+            </custom:ArrowLine.Y1>
+
+            <custom:ArrowLine.X2>
+                <MultiBinding Converter="{StaticResource LinkEndsPositionConverter}" ConverterParameter="x2">
+                    <Binding  />
+                    <Binding ElementName="nodesItemSource" Path="ItemContainerGenerator" />
+                    <Binding Path="Destination.Location.X" />
+                    <Binding Path="Destination.Location" />
+                </MultiBinding>
+            </custom:ArrowLine.X2>
+
+            <custom:ArrowLine.Y2>
+                <MultiBinding Converter="{StaticResource LinkEndsPositionConverter}" ConverterParameter="y2">
+                    <Binding  />
+                    <Binding ElementName="nodesItemSource" Path="ItemContainerGenerator" />
+                    <Binding Path="Destination.Location.Y" />
+                    <Binding Path="Destination.Location" />
+                </MultiBinding>
+            </custom:ArrowLine.Y2>
+        </custom:ArrowLine>
+    </Grid>
+</UserControl>

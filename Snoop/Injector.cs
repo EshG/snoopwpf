@@ -66,7 +66,11 @@ namespace Snoop
 			var directory = Path.GetDirectoryName(location);
 			var file = Path.Combine(directory, "ManagedInjectorLauncher" + Suffix(windowHandle) + ".exe");
 
-			Process.Start(file, windowHandle + " \"" + assembly.Location + "\" \"" + className + "\" \"" + methodName + "\"");
+            Process.Start(file, windowHandle + " \"" + assembly.Location + "\" \"" + className + "\" \"" + methodName + "\"");
+
+          
+
+           
 		}
 	}
 }

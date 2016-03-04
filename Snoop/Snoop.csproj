@@ -149,6 +149,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Visualization\Views\DiagramNodeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Visualization\Views\GeneralDiagramView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Visualization\Views\LinkArrow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ZoomerControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -256,6 +268,29 @@
     <Compile Include="Shell\SnoopPSHostRawUserInterface.cs" />
     <Compile Include="Shell\SnoopPSHostUserInterface.cs" />
     <Compile Include="Shell\VisualTreeProvider.cs" />
+    <Compile Include="Visualization\Converters\LinkEndsPositionConverter.cs" />
+    <Compile Include="Visualization\CustomControls\ArrowLine.cs" />
+    <Compile Include="Visualization\CustomControls\ArrowLineBase.cs" />
+    <Compile Include="Visualization\CustomControls\CustomCanvas.cs" />
+    <Compile Include="Visualization\GraphLayout\DPoint.cs" />
+    <Compile Include="Visualization\GraphLayout\ITreeNode.cs" />
+    <Compile Include="Visualization\GraphLayout\LayeredTreeDraw.cs" />
+    <Compile Include="Visualization\GraphLayout\TreeConnection.cs" />
+    <Compile Include="Visualization\GraphLayout\TreeNodeGroup.cs" />
+    <Compile Include="Visualization\ViewModels\DiagramNodeViewModel.cs" />
+    <Compile Include="Visualization\ViewModels\DiagramViewModel.cs" />
+    <Compile Include="Visualization\ViewModels\IDiagramViewModel.cs" />
+    <Compile Include="Visualization\ViewModels\NodeLinkViewModel.cs" />
+    <Compile Include="Visualization\ViewModels\ViewModelBase.cs" />
+    <Compile Include="Visualization\Views\DiagramNodeView.xaml.cs">
+      <DependentUpon>DiagramNodeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Visualization\Views\GeneralDiagramView.xaml.cs">
+      <DependentUpon>GeneralDiagramView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Visualization\Views\LinkArrow.xaml.cs">
+      <DependentUpon>LinkArrow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ZoomerControl.xaml.cs">
       <DependentUpon>ZoomerControl.xaml</DependentUpon>
     </Compile>
@@ -398,7 +433,9 @@
   <ItemGroup>
     <Resource Include="Resources\SnoopCrosshairsCursor.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Visualization\Helpers\" />
+  </ItemGroup>
   <ProjectExtensions>
     <InteractiveDesigner>
       <ProjectExtensions>

@@ -16,6 +16,7 @@ All other rights reserved.
 	xmlns:conv="clr-namespace:Snoop.Converters"
 	xmlns:MethodsTabNS="clr-namespace:Snoop.MethodsTab"
     xmlns:DebugListenerNS="clr-namespace:Snoop.DebugListenerTab"
+    xmlns:Vis="clr-namespace:Snoop.Visualization.Views"
 	mc:Ignorable="d"
 	Icon="Snoop.ico"
 	Title="Snoop"
@@ -342,6 +343,11 @@ All other rights reserved.
 
 				<DebugListenerNS:DebugListenerControl/>
 			</TabItem>
+            <TabItem Header="Visualization" x:Name="diagramTab">
+                <ContentControl x:Name="visualizeContentControl">
+                    
+                </ContentControl>
+            </TabItem>
 		</TabControl>
 
 		<!-- Horizontal GridSplitter (between the tab control (with the property grid/events view) and the previewer) -->

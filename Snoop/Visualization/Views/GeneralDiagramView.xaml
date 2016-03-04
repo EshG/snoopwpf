@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="Snoop.Visualization.Views.GeneralDiagramView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:custom="clr-namespace:Snoop.Visualization.CustomControls"
+             
+             xmlns:local="clr-namespace:Snoop.Visualization.Views">
+    <Grid>
+        <ScrollViewer  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
+            Width="{Binding Path=ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContentControl}}}" >
+            <Grid >
+
+                <ItemsControl ItemsSource="{Binding Nodes}" Name="nodesItemSource"  >
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate >
+                            <custom:CustomCanvas />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <local:DiagramNodeView x:Name="DiagramNode" >
+                                  
+                                </local:DiagramNodeView>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                    <ItemsControl.ItemContainerStyle>
+                        <Style TargetType="FrameworkElement">
+                            <Setter Property="Canvas.Top" Value="{Binding Location.Y,Mode=OneWay}" />
+                            <Setter Property="Canvas.Left" Value="{Binding Location.X,Mode=OneWay}" />
+                        </Style>
+                    </ItemsControl.ItemContainerStyle>
+                </ItemsControl>
+
+
+                <ItemsControl ItemsSource="{Binding Links}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate >
+                            <Canvas />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <local:LinkArrow />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
