@@ -31,7 +31,7 @@ namespace Snoop.Visualization.ViewModels
 
         public override string ToString()
         {
-            return Origin.ControlNameName + " -> " + Destination.ControlNameName;
+            return Origin.ControlName + " -> " + Destination.ControlName;
         }
     }
 }

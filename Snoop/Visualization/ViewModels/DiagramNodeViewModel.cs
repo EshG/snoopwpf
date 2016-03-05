@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using GraphLayout;
+using System.Windows.Controls;
 
 namespace Snoop.Visualization.ViewModels
 {
@@ -35,7 +36,7 @@ namespace Snoop.Visualization.ViewModels
         }
 
         //
-        public string ControlNameName
+        public string ControlName
         {
             get
             {
@@ -59,6 +60,15 @@ namespace Snoop.Visualization.ViewModels
             }
         }
 
+        public bool IsUserControl
+        {
+            get
+            {
+                FrameworkElement fe = Model.Target as FrameworkElement;
+                return fe.GetType().BaseType == typeof(UserControl);
+            }
+        }
+
         private bool _IsSelected;
         public bool IsSelected
         {
@@ -66,6 +76,7 @@ namespace Snoop.Visualization.ViewModels
             set
             {
                 _IsSelected = value;
+
                 NotifyChange(nameof(IsSelected));
             }
         }

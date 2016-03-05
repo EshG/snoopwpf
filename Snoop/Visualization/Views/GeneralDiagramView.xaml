@@ -4,9 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:custom="clr-namespace:Snoop.Visualization.CustomControls"
-             
              xmlns:local="clr-namespace:Snoop.Visualization.Views">
     <Grid>
+
         <ScrollViewer Name="scrollViewer"  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="Transparent"
             Width="{Binding Path=ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContentControl}}}" >
             <Grid Name="innerGrid">
@@ -58,6 +58,7 @@
                 <Slider  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Maximum="1.2" Minimum="0.2" x:Name="slider"/>
             </Grid>
         </ScrollViewer>
+
      
     </Grid>
 </UserControl>

@@ -21,6 +21,8 @@ namespace Snoop.Visualization.ViewModels
             ReArange();
         }
 
+      
+
         private DiagramNodeViewModel _Root;
         public DiagramNodeViewModel Root
         {
@@ -49,7 +51,7 @@ namespace Snoop.Visualization.ViewModels
 
         public void SetSelection(VisualTreeItem treeItem)
         {
-            if (viewModelsByTreeItem.ContainsKey(treeItem))
+            if (treeItem != null && viewModelsByTreeItem.ContainsKey(treeItem))
             {
                 SelectedNode = viewModelsByTreeItem[treeItem];
             }
@@ -133,12 +135,8 @@ namespace Snoop.Visualization.ViewModels
         {
             foreach (VisualTreeItem item in value.Children)
             {
-                //Only if the item is a framework element it has a datacontext
                 if (item.Target is FrameworkElement)
                 {
-                    FrameworkElement fe = item.Target as FrameworkElement;
-
-
                     DiagramNodeViewModel node = new DiagramNodeViewModel(item, this);
 
                     if (Root == null)
@@ -149,13 +147,6 @@ namespace Snoop.Visualization.ViewModels
 
                     DiagramNodeViewModel parent = GetParent(item.Parent);
 
-                    //We don't want to show regular elements unless their view model has changed
-                    //if (item.Target.GetType().BaseType != typeof(UserControl) && (parent != null && parent.ViewModelName == node.ViewModelName))
-                    //{
-                    //    continue;
-                    //}
-
-                    //The root may not be a framework element (App)
                     if (value.Target is FrameworkElement && parent != null && node != null)
                     {
                         NodeLinkViewModel link = new NodeLinkViewModel()

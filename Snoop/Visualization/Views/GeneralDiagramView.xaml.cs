@@ -107,6 +107,7 @@ namespace Snoop.Visualization.Views
             scaleTransform.ScaleY = e.NewValue;
 
             var centerOfViewport = new Point(scrollViewer.ViewportWidth / 2, scrollViewer.ViewportHeight / 2);
+
             lastCenterPositionOnTarget = scrollViewer.TranslatePoint(centerOfViewport, innerGrid);
         }
 

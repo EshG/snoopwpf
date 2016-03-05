@@ -15,15 +15,17 @@
                         <Setter Property="Foreground" Value="Black" />
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding IsSelected}" Value="True">
-                                <Setter Property="FontWeight" Value="Bold" />
                                 <Setter Property="Foreground" Value="White" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsUserControl}" Value="True">
+                                <Setter Property="Foreground" Value="Black" />
                             </DataTrigger>
                         </Style.Triggers>
 
                     </Style>
                 </StackPanel.Resources>
                 <TextBlock DataContext="{Binding ElementName=userControl,Path=DataContext}" 
-                           IsHitTestVisible="False" Text="{Binding ControlNameName}" FontWeight="Bold" />
+                           IsHitTestVisible="False" Text="{Binding ControlName}" FontWeight="Bold" />
                 
                 <TextBlock DataContext="{Binding ElementName=userControl,Path=DataContext}" 
                            IsHitTestVisible="False" Text="{Binding ViewModelName}" />
@@ -51,6 +53,10 @@
                                 <DataTrigger Binding="{Binding IsSelected}" Value="True">
                                     <Setter Property="Fill" Value="DodgerBlue" />
                                 </DataTrigger>
+                                <DataTrigger Binding="{Binding IsUserControl}" Value="True">
+                                    <Setter Property="Fill" Value="Magenta" />
+                                </DataTrigger>
+
                             </Style.Triggers>
                         </Style>
                     </Rectangle.Style>

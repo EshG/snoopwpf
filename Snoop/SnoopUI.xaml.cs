@@ -1004,7 +1004,7 @@ namespace Snoop
 
 		private ObservableCollection<VisualTreeItem> visualTreeItems = new ObservableCollection<VisualTreeItem>();
 
-		private string propertyFilter = string.Empty;
+		//private string propertyFilter = string.Empty;
 		private string eventFilter = string.Empty;
 
 		private DelayedCall filterCall;
